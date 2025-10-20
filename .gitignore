@@ -40,8 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# pasta
-/src/actions
 
 #credencials
 credentials.json
+
+.env
