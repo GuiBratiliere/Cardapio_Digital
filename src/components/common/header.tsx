@@ -10,7 +10,17 @@ import { MapPin } from "lucide-react";
 
 export const Header = () => {
   const [tipos, setTipos] = useState<string[][]>([]);
+  const [setDeactive, setActive] = useState("");
   const observer = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/api/tipos");
+      const json = await res.json();
+      setTipos(json.data || []);
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const sectionId = document.querySelectorAll("section[id]");
@@ -31,17 +41,6 @@ export const Header = () => {
     });
     return () => observer.current?.disconnect();
   }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/tipos");
-      const json = await res.json();
-      setTipos(json.data || []);
-    }
-    fetchData();
-  }, []);
-
-  const [setDeactive, setActive] = useState("");
 
   // 1. Crie uma lista de tipos ÚNICOS usando useMemo
   const uniqueTipos = useMemo(() => {
