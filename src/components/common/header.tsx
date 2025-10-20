@@ -53,21 +53,21 @@ export const Header = () => {
   }, [tipos]); // Recalcula apenas quando 'tipos' muda
 
   return (
-    <header className="w-full bg-white shadow-md p-4 flex justify-center items-center sticky top-0 z-50 rounded-b-2xl">
+    <header className="w-full bg-white shadow-md p-4 flex justify-center items-center sticky top-0 z-80 rounded-b-2xl">
       <div className="flex w-full flex-col items-center">
         <Link href="/">
           <Image
             src="/logotipo-antigo-ocidental-de-estilo-vintage-de-luxo-para-cafe-e-restaurante-do-hotel_117739-1128.jpg"
             alt="Logotipo do Café/Restaurante"
-            width={100}
-            height={100}
+            width={80}
+            height={80}
             className="rounded-full"
           />
         </Link>
-        <h1 className="p-4 text-3xl font-semibold">RESTAURANT</h1>
-        <div className="flex flex-row space-x-1 w-full justify-center">
+        <h1 className="p-4 text-2xl font-semibold">RESTAURANT</h1>
+        <div className="flex flex-row space-x-1 w-full justify-center mb-2 text-gray-600 items-center">
           <MapPin />
-          <a href="https://www.google.com/maps">
+          <a href="https://www.google.com/maps" className="text-[12px] ">
             Rua tal, bairro tal, cidade tal, cep: 00000-000
           </a>
         </div>
