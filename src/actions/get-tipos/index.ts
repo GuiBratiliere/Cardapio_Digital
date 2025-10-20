@@ -5,7 +5,7 @@ export async function getTipos() {
     const keyFilePath = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS!);
 
     const auth = new google.auth.GoogleAuth({
-      keyFile: keyFilePath,
+      credentials: keyFilePath,
       scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     });
 
