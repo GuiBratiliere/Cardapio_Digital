@@ -2,7 +2,7 @@ import { google } from "googleapis";
 
 export async function getPratos() {
   try {
-    const keyFilePath = process.env.GOOGLE_APPLICATION_CREDENTIALS!;
+    const keyFilePath = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS!);
 
     const auth = new google.auth.GoogleAuth({
       keyFile: keyFilePath,
