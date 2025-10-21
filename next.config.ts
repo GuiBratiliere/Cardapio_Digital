@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     domains: [
-      "italianismo.com.br",
+      "i.pinimg.com",
       "drive.google.com", // adicione outros domínios se usar mais imagens externas
     ],
   },

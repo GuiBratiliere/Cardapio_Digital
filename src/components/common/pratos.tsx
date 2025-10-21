@@ -58,14 +58,14 @@ export function Pratos() {
 
   if (Object.keys(groupPratos).length === 0) {
     return (
-      <div className="w-full flex justify-center items-center p-8">
+      <div className="w-full flex justify-center items-center p-8 animate-fade-in transition-opacity duration-700 ease-in-out">
         <img src="/Carregando_Cardapio.gif" alt="" />
       </div>
     );
   }
 
   return (
-    <div className="w-full space-y-8 p-4 bg-[#CBDCD3] relative z-10 -mt-3 animate-fade-in transition-opacity duration-700 ease-in-out">
+    <div className="w-full space-y-8 p-4 bg-[#CBDCD3] relative z-10 -mt-3">
       {/* 2.1. Itera sobre as chaves (nomes dos grupos: Entrada, Principal, etc.) */}
       {Object.entries(groupPratos).map(([tipoGrupo, pratosDoGrupo]) => (
         // O `tipoGrupo` é o nome do grupo (a chave do objeto)
