@@ -1,6 +1,4 @@
-"use client";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
 import React from "react";
 import {
   Card,
@@ -9,6 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import gerarSlug from "@/helpers/gerar-slug";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface Prato {
   nomePrato: string;
@@ -18,45 +19,43 @@ interface Prato {
   descricao: string;
   Categoria: string;
   imagem_URL: string;
+  slug: string;
 }
 
-export function Pratos() {
-  const [pratos, setPratos] = useState<string[][]>([]);
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/pratos");
-      const json = await res.json();
-      setPratos(json.data || []);
+export const dynamic = "force-dynamic";
+
+export async function Pratos() {
+  const res = await fetch("http://localhost:3000/api/pratos", {
+    cache: "no-store",
+  });
+  const json = await res.json();
+  const pratos = json.data || [];
+
+  const group: { [key: string]: Prato[] } = {};
+  pratos.slice(1).forEach((row: string[]) => {
+    const prato: Prato = {
+      nomePrato: row[0],
+      tipo: row[1],
+      preco: row[2],
+      status: row[3],
+      descricao: row[4],
+      Categoria: row[5],
+      imagem_URL: row[6],
+      slug: gerarSlug(row[0]),
+    };
+
+    const statusLower = prato.status.trim().toLowerCase();
+    if (statusLower !== "ativo") {
+      return; // Ignora pratos inativos
     }
-    fetchData();
-  }, []);
+    const tipodoprato = prato.tipo;
+    if (!group[tipodoprato]) {
+      group[tipodoprato] = [];
+    }
+    group[tipodoprato].push(prato);
+  });
 
-  const groupPratos = useMemo(() => {
-    const group: { [key: string]: Prato[] } = {};
-    pratos.slice(1).forEach((row) => {
-      const prato: Prato = {
-        nomePrato: row[0],
-        tipo: row[1],
-        preco: row[2],
-        status: row[3],
-        descricao: row[4],
-        Categoria: row[5],
-        imagem_URL: row[6],
-      };
-      const statusLower = prato.status.trim().toLowerCase();
-      if (statusLower !== "ativo") {
-        return; // Ignora pratos inativos
-      }
-      const tipodoprato = prato.tipo;
-      if (!group[tipodoprato]) {
-        group[tipodoprato] = [];
-      }
-      group[tipodoprato].push(prato);
-    });
-    return group;
-  }, [pratos]);
-
-  if (Object.keys(groupPratos).length === 0) {
+  if (Object.keys(group).length === 0) {
     return (
       <div className="w-full flex justify-center items-center p-8 animate-fade-in transition-opacity duration-700 ease-in-out">
         <img src="/Carregando_Cardapio.gif" alt="" />
@@ -67,7 +66,7 @@ export function Pratos() {
   return (
     <div className="w-full space-y-8 p-4 bg-[#CBDCD3] relative z-10 -mt-3">
       {/* 2.1. Itera sobre as chaves (nomes dos grupos: Entrada, Principal, etc.) */}
-      {Object.entries(groupPratos).map(([tipoGrupo, pratosDoGrupo]) => (
+      {Object.entries(group).map(([tipoGrupo, pratosDoGrupo]) => (
         // O `tipoGrupo` é o nome do grupo (a chave do objeto)
         // Ignora pratos inativos
         <section
@@ -97,7 +96,7 @@ export function Pratos() {
                 </div>
 
                 {/* Imagem - movida para o layout flex, removendo CardFooter desnecessário */}
-                <div className="ml-4 flex-shrink-0">
+                <div className="ml-4 flex-shrink-0 p-4">
                   <Image
                     src={prato.imagem_URL}
                     alt={prato.nomePrato}
@@ -105,6 +104,9 @@ export function Pratos() {
                     height={100}
                     className="rounded-lg object-cover w-24 h-24"
                   />
+                  <Button variant="outline" className="w-full p-4 mt-2">
+                    <Link href={`/detalhe/${prato.slug}`}> Detalhe </Link>
+                  </Button>
                 </div>
               </Card>
             </div>
