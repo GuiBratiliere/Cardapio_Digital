@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 
 interface CartItem {
   slug: string;

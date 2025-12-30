@@ -3,15 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react"; // Importe useMemo
-import { ShoppingBasketIcon } from "lucide-react";
+
 import { TipoPratoHeader } from "./tipo-prato-header";
 import { usePathname } from "next/navigation";
+
+import CartPage from "@/app/cart/page";
 
 export const Header = () => {
   const pathname = usePathname();
   const temslug = pathname.includes("/detalhe/");
   return (
-    <header className="bg-white shadow-md p-5 flex flex-col justify-between items-center sticky top-0 z-80 rounded-b-2xl">
+    <header className="bg-white shadow-md p-5 flex flex-col justify-between items-center sticky top-0 z-40 rounded-b-2xl">
       <div className="flex items-center justify-between p-5 w-full">
         <div className="flex justify-between items-center">
           <Link href="/">
@@ -27,7 +29,7 @@ export const Header = () => {
             RESTAURANT
           </h3>
         </div>
-        <ShoppingBasketIcon />
+        <CartPage />
       </div>
       {!temslug && <TipoPratoHeader />}
     </header>

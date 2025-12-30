@@ -50,7 +50,7 @@ export const TipoPratoHeader = () => {
   }, [tipos]); // Recalcula apenas quando 'tipos' muda
 
   return (
-    <div className="w-full bg-white p-0.5 flex justify-center items-center">
+    <div className="w-full bg-white p-0.5 flex justify-center items-center ">
       <div className="w-full border-b bg-white">
         <ScrollArea className="w-full whitespace-nowrap scroll-area-no-bar">
           <div className="flex space-x-1 px-2 py-3 justify-center">
