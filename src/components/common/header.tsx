@@ -6,7 +6,7 @@ import Link from "next/link";
 import { TipoPratoHeader } from "./tipo-prato-header";
 import { usePathname } from "next/navigation";
 
-import CartPage from "@/app/cart/page";
+import CartPageSheet from "@/components/cart/cart-sheet";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -28,7 +28,7 @@ export const Header = () => {
             RESTAURANT
           </h3>
         </div>
-        <CartPage />
+        <CartPageSheet />
       </div>
       {!temslug && <TipoPratoHeader />}
     </header>
