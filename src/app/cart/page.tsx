@@ -15,13 +15,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 export default function CartPage() {
   const { cartItems, removeFromCart, clearCart } = useCartContext();
   const tel = "5531995259313";
-  const produto = cartItems.map((item) => {
-    return `*${item.nomePrato}*%0AQuantidade: ${item.quantity}%0APreço: R$ ${item.preco}%0A%0A`;
-  });
+  const produto = cartItems
+    .map(
+      (item) =>
+        `*${item.nomePrato}*%0AQuantidade: ${item.quantity}%0APreço: R$ ${item.preco}%0A%0A`
+    )
+    .join("");
   const whatsapp = `https://wa.me/${tel}?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido.%0A%0A${produto}`;
-  const preconumber = cartItems.map((item) => {
-    return convertInNumber(item.preco) * item.quantity;
-  });
+
   return (
     <div className="relative z-[9999]">
       <Sheet>
@@ -53,7 +54,7 @@ export default function CartPage() {
                     <p className="text-sm text-gray-500">
                       {item.quantity}x — R$ {item.preco}
                     </p>
-                    <p>R$ {preconumber}</p>
+                    <p>R$ {convertInNumber(item.preco) * item.quantity}</p>
                   </div>
                   <button
                     onClick={() => removeFromCart(item.slug)}
