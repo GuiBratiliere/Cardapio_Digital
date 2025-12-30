@@ -24,7 +24,7 @@ interface Prato {
 export const dynamic = "force-dynamic";
 
 export async function Pratos() {
-  const res = await fetch("http://localhost:3000/api/pratos", {
+  const res = await fetch("/api/pratos", {
     cache: "no-store",
   });
   const json = await res.json();
