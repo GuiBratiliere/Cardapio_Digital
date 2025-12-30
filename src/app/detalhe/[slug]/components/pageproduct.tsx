@@ -1,6 +1,6 @@
 "use client";
 import gerarSlug from "@/helpers/gerar-slug";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useCartContext } from "@/app/context/cart-context";

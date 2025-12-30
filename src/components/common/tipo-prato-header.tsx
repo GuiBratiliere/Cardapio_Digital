@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useRef } from "react"; // Importe useMemo
+import { useEffect, useState, useMemo, useRef } from "react"; // Importe useMemo
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";

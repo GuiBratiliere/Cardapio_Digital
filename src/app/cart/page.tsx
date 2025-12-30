@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useCartContext } from "../context/cart-context";
 import convertInNumber from "@/helpers/convert-in-number";
 import {
